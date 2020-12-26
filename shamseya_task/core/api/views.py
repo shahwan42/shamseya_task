@@ -33,6 +33,12 @@ class ReviewApi(APIView):
 
             qs = qs.filter(submitted_at__lte=datetime.date(to_date))
 
+        count = qs.count()
         qs = qs.prefetch_related("answers")
 
-        return Response(ReviewSerializer(qs, many=True).data)
+        return Response(
+            {
+                "count": count,
+                "reviews": ReviewSerializer(qs, many=True).data,
+            }
+        )
