@@ -1,0 +1,13 @@
+### API documentation
+
+### Variables
+@hostname = localhost
+@port = 8005
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+@token =
+
+### ReviewsApi
+### list
+GET http://{{host}}/api/core/reviews
+content-type: {{contentType}}

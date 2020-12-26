@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Third party
     "phonenumber_field",
+    "rest_framework",
     # Local
     "shamseya_task.users.apps.UsersConfig",
     "shamseya_task.core.apps.CoreConfig",

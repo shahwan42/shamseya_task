@@ -19,6 +19,7 @@ from django.views.generic.base import TemplateView
 
 api_urlpatterns = [
     path("users/", include("shamseya_task.users.api.urls", namespace="users_api")),
+    path("core/", include("shamseya_task.core.api.urls", namespace="core_api")),
 ]
 
 urlpatterns = [
