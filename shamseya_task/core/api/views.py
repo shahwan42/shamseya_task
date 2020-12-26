@@ -4,6 +4,7 @@ from dateutil import parser
 
 from rest_framework.response import Response
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 from shamseya_task.core.api.serializers import ReviewSerializer
 
@@ -11,6 +12,7 @@ from shamseya_task.core.api.serializers import ReviewSerializer
 class ReviewApi(generics.ListAPIView):
     serializer_class = ReviewSerializer
     queryset = Review.objects.all()
+    permission_classes = (IsAuthenticated, IsAdminUser)
 
     def get_queryset(self):
         from_date = self.request.query_params.get("from_date")
