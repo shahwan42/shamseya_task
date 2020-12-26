@@ -1,19 +1,20 @@
 from datetime import datetime
+from shamseya_task.core.models import Review
 from dateutil import parser
 
-from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import generics
 
-from shamseya_task.core.models import Review
 from shamseya_task.core.api.serializers import ReviewSerializer
 
 
-class ReviewApi(APIView):
+class ReviewApi(generics.ListAPIView):
+    serializer_class = ReviewSerializer
     queryset = Review.objects.all()
 
-    def get(self, request):
-        from_date = request.query_params.get("from_date")
-        to_date = request.query_params.get("to_date")
+    def get_queryset(self):
+        from_date = self.request.query_params.get("from_date")
+        to_date = self.request.query_params.get("to_date")
 
         qs = self.queryset
 
@@ -33,12 +34,5 @@ class ReviewApi(APIView):
 
             qs = qs.filter(submitted_at__lte=datetime.date(to_date))
 
-        count = qs.count()
         qs = qs.prefetch_related("answers", "answers__choice", "answers__question")
-
-        return Response(
-            {
-                "count": count,
-                "reviews": ReviewSerializer(qs, many=True).data,
-            }
-        )
+        return qs
