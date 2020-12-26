@@ -34,7 +34,7 @@ class ReviewApi(APIView):
             qs = qs.filter(submitted_at__lte=datetime.date(to_date))
 
         count = qs.count()
-        qs = qs.prefetch_related("answers")
+        qs = qs.prefetch_related("answers", "answers__choice", "answers__question")
 
         return Response(
             {

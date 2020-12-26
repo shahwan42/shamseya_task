@@ -20,10 +20,14 @@ class ChoiceFactory(DjangoModelFactory):
     class Meta:
         model = Choice
 
+    text = factory.fuzzy.FuzzyText(length=20)
+
 
 class QuestionFactory(DjangoModelFactory):
     class Meta:
         model = Question
+
+    text = factory.Faker("text")
 
 
 class AnswerFactory(DjangoModelFactory):
