@@ -16,6 +16,7 @@ django-model-utils = "^4.0.0"
 django-phonenumber-field = {extras = ["phonenumbers"], version = "^5.0.0"}
 djangorestframework = "^3.12.1"
 django-extensions = "^3.0.9"
+factory-boy = "^3.1.0"
 
 [tool.poetry.dev-dependencies]
 flake8-black = "^0.2.1"
