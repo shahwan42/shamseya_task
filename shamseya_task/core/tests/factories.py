@@ -1,7 +1,6 @@
 import datetime
 import factory
 import factory.fuzzy
-from django.utils import timezone
 from factory.django import DjangoModelFactory
 
 from shamseya_task.core.models import Answer, Choice, Question, Review
