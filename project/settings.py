@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     # Third party
     "phonenumber_field",
     "rest_framework",
+    "debug_toolbar",
     # Local
     "shamseya_task.users.apps.UsersConfig",
     "shamseya_task.core.apps.CoreConfig",
@@ -71,7 +72,12 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 
 ROOT_URLCONF = "project.urls"
 
