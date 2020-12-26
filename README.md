@@ -9,12 +9,14 @@
 
 - clone the project
 - cd into project's dir
-- cp `.env.example` to `.env` and put your values, or use defaults
+- `$ cp .env.example .env`
 - `$ docker-compose up` to run postgres container
 - `$ manage.py test` to run tests
+- `$ manage.py migrate` to apply migrations
+- `$ manage.py loaddata core` to load initial data
 - `$ manage.py runserver` to run server
-- navigate to `http://localhost:8000/api/` to test APIs
-- use Postman to test endpoint
+- navigate to `http://localhost:8000/api/core/reviews/` to open in the browser
+- Or use Postman to test the endpoint
 
 ## Test from inside VS Code
 
