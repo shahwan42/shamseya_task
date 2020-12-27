@@ -6,20 +6,26 @@
 @host = {{hostname}}:{{port}}
 @contentType = application/json
 @token =
+@user =
+@passwd =
 
 ### ReviewsApi
 ### list
 GET http://{{host}}/api/core/reviews/
 content-type: {{contentType}}
+Authorization: Basic {{user}}:{{passwd}}
 
 ### filter with from_date
 GET http://{{host}}/api/core/reviews/?from_date=2020-12-01
 content-type: {{contentType}}
+Authorization: Basic {{user}}:{{passwd}}
 
 ### filter with to_date
 GET http://{{host}}/api/core/reviews/?to_date=2018-02-01
 content-type: {{contentType}}
+Authorization: Basic {{user}}:{{passwd}}
 
 ### filter with both
 GET http://{{host}}/api/core/reviews/?from_date=2019-03-04&to_date=2019-04-04
 content-type: {{contentType}}
+Authorization: Basic {{user}}:{{passwd}}

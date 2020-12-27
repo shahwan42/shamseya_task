@@ -14,8 +14,8 @@
 - `$ manage.py test` to run tests
 - `$ manage.py migrate` to apply migrations
 - `$ manage.py loaddata core` to load initial data
-- `$ manage.py runserver` to run server
-- navigate to `http://localhost:8000/api/core/reviews/` to open in the browser
+- `$ manage.py runserver 8005` to run server
+- navigate to `http://localhost:8005/api/core/reviews/` to open in the browser
 - Or use Postman to test the endpoint
 
 ## Test from inside VS Code
