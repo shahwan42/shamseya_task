@@ -15,9 +15,10 @@
 - `$ ./manage.py test` to run tests
 - `$ ./manage.py migrate` to apply migrations
 - `$ ./manage.py loaddata core` to load initial data
+- `$ ./manage.py createsuperuser` create a super user to login with, the endpoint needs an authenticated staff user
 - `$ ./manage.py runserver 8005` to run server
-- navigate to `http://localhost:8005/api/core/reviews/` to open in the browser
-- Or use Postman to test the endpoint
+- navigate to `http://localhost:8005/api/core/reviews/` to open in the browser (Make sure you're logged-in)
+- Or use Postman to test the endpoint (provide Basic Auth: user&pass)
 
 ## More commands
 
@@ -30,3 +31,5 @@
 - make sure db container & django server are running
 - open the `api.http` file
 - make requests and see responses :))
+
+## Thank you
