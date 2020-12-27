@@ -8,8 +8,13 @@
 ## Run
 
 - clone the project
-- cd into project's dir
-- create a python virtualenv and activate it
+- cd into project's directory
+- create a python virtualenv and activate it (choose one of the following approaches)
+  - `$ python -m venv .venv && source .venv/bin/activate`
+  - `$ mkvirtualenv shamseya-task`
+  - `$ poetry install && poetry shell` (will automatically create a venv and install the deps (needs poetry installed), skip following 2 steps after this approach)
+- `$ python -m pip install poetry`
+- `$ poetry install` install project dependencies inside the venv
 - `$ cp .env.example .env`
 - `$ docker-compose up` to run postgres container
 - `$ ./manage.py test` to run tests
