@@ -5,7 +5,7 @@ from rest_framework import serializers
 class ChoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Choice
-        fields = ("id", "text")
+        fields = ("id",)  # "text")
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -13,7 +13,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ("id", "text")  # , "choices")
+        fields = ("id",)  # "text", "choices")
 
 
 class AnswerSerializer(serializers.ModelSerializer):

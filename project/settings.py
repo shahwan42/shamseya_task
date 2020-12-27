@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "rest_framework",
     "debug_toolbar",
+    "django_extensions",
     # Local
     "shamseya_task.users.apps.UsersConfig",
     "shamseya_task.core.apps.CoreConfig",
