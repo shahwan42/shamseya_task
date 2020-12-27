@@ -1,4 +1,7 @@
 from datetime import datetime
+from collections import defaultdict
+
+import ipdb
 from shamseya_task.core.models import Review
 from dateutil import parser
 
@@ -38,3 +41,15 @@ class ReviewApi(generics.ListAPIView):
 
         qs = qs.prefetch_related("answers", "answers__choice", "answers__question")
         return qs
+
+    def get_paginated_response(self, data):
+        assert self.paginator is not None
+        revs = defaultdict(list)
+
+        # Merge reviews that have similar dates
+        for entry in data:
+            revs[entry["submitted_at"]].append(
+                {"id": entry["id"], "answers": entry["answers"]}
+            )
+
+        return self.paginator.get_paginated_response(revs)
