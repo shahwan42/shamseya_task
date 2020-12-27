@@ -1,5 +1,6 @@
-from shamseya_task.core.models import Answer, Choice, Question, Review
 from rest_framework import serializers
+
+from shamseya_task.core.models import Answer, Choice, Question, Review
 
 
 class ChoiceSerializer(serializers.ModelSerializer):

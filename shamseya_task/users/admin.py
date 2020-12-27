@@ -1,7 +1,6 @@
-from django.contrib import admin
-from django.contrib import auth
+from django.contrib import admin, auth
 
-from .forms import UserCreationForm, UserChangeForm
+from .forms import UserChangeForm, UserCreationForm
 from .models import User
 
 

@@ -1,9 +1,9 @@
-from shamseya_task.users.models import User
 from django.test import tag
 from django.urls import reverse
 from rest_framework.test import APITestCase
 
 from shamseya_task.core.tests.factories import ReviewFactory
+from shamseya_task.users.models import User
 
 
 @tag("reviewapi")

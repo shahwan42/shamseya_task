@@ -1,15 +1,14 @@
-from datetime import datetime
 from collections import defaultdict
+from datetime import datetime
 
 import ipdb
-from shamseya_task.core.models import Review
 from dateutil import parser
-
-from rest_framework.response import Response
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.response import Response
 
 from shamseya_task.core.api.serializers import ReviewSerializer
+from shamseya_task.core.models import Review
 
 
 class ReviewApi(generics.ListAPIView):

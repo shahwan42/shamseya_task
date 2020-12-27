@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+
 from shamseya_task.core.models import Answer, Choice, Question, Review
 
 

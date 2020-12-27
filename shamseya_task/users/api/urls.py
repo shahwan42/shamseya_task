@@ -1,6 +1,5 @@
 from django.urls.conf import path
 
-
 from .views import SignUpApi
 
 app_name = "users_api"
