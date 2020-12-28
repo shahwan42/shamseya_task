@@ -42,26 +42,24 @@ class ReviewApi(APIView):
 
             qs = qs.filter(submitted_at__lte=datetime.date(to_date))
 
-        # reviews with answers
+        # reviews with answer_ids and answer_count
         qs = qs.prefetch_related("answers").annotate(
             answer_ids=ArrayAgg("answers"), answer_count=Count("answers")
         )
-        # import ipdb
-
-        # ipdb.set_trace()
-
         it = qs.iterator()
 
         def shaped_dict():
-            return {"count": 0, "answer_ids": []}
+            return {"count": 0, "answer_count": 0, "answer_ids": []}
 
         revs = defaultdict(shaped_dict)
         for review in it:
             review_date = str(review.submitted_at)
             revs[review_date].update(
                 {
-                    "answer_ids": revs[review_date]["answer_ids"] + review.answer_ids,
                     "count": revs[review_date]["count"] + 1,
+                    "answer_count": revs[review_date]["answer_count"]
+                    + review.answer_count,
+                    "answer_ids": revs[review_date]["answer_ids"] + review.answer_ids,
                 }
             )
         resp_data = revs
