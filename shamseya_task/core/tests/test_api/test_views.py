@@ -39,22 +39,22 @@ class ReviewApiTests(APITestCase):
         self.client.force_login(self.user)
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.json().get("count"), 20)
+        self.assertEqual(len(resp.json()), 20)
 
     def test_list_with_from_date_only(self):
         self.client.force_login(self.user)
         resp = self.client.get(f"{self.url}?from_date=2018-01-01")
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.json().get("count"), 20)
+        self.assertEqual(len(resp.json()), 20)
 
     def test_list_with_to_date_only(self):
         self.client.force_login(self.user)
         resp = self.client.get(f"{self.url}?to_date=2020-12-31")
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.json().get("count"), 20)
+        self.assertEqual(len(resp.json()), 20)
 
     def test_list_with_both_from_and_to_dates(self):
         self.client.force_login(self.user)
         resp = self.client.get(f"{self.url}?from_date=2018-01-01&to_date=2020-12-31")
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.json().get("count"), 20)
+        self.assertEqual(len(resp.json()), 20)
