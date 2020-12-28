@@ -10,7 +10,15 @@ class UserAdmin(auth.admin.UserAdmin):
     form = UserChangeForm
     model = User
 
-    list_display = ("id", "email", "name", "is_superuser", "is_staff", "is_active")
+    list_display = (
+        "id",
+        "username",
+        "email",
+        "name",
+        "is_superuser",
+        "is_staff",
+        "is_active",
+    )
     list_display_links = ("id",)
     list_filter = ("is_staff", "is_active")
     search_fields = ("email", "name")
