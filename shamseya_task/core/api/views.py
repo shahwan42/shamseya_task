@@ -10,6 +10,8 @@ from shamseya_task.core.models import Review
 
 
 class ReviewApi(APIView):
+    """List of reviews and their answers, reviews are grouped by submitted_at date"""
+
     serializer_class = ReviewSerializer
     queryset = Review.objects.all()
     permission_classes = (IsAuthenticated, IsAdminUser)
@@ -37,7 +39,7 @@ class ReviewApi(APIView):
             qs = qs.filter(submitted_at__lte=datetime.date(to_date))
 
         # reviews with answers
-        # qs = qs.prefetch_related("answers")
+        qs = qs.prefetch_related("answers")
 
         # response data shape should be like the follwing
         # resp = {
