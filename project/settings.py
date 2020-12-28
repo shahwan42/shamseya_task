@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "debug_toolbar",
     "django_extensions",
-    "django_pgviews",
     # Local
     "shamseya_task.users.apps.UsersConfig",
     "shamseya_task.core.apps.CoreConfig",

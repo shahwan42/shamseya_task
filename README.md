@@ -19,12 +19,16 @@
 - `$ docker-compose up` to run postgres container
 - `$ ./manage.py test` to run tests
 - `$ ./manage.py migrate` to apply migrations
-- `$ ./manage.py loaddata all_data.db` to load my data to test on
+- `$ ./manage.py loaddata fixtures/4krev.db` to load 4K Reviews Dataset
+- `$ ./manage.py loaddata fixtures/8krev.db` to load 8K Reviews Dataset
+- `$ ./manage.py loaddata fixtures/12krev.db` to load 12K Reviews Dataset
+- `$ ./manage.py loaddata fixtures/16krev.db` to load 16K Reviews Dataset
+- `$ ./manage.py loaddata fixtures/20krev.db` to load 20K Reviews Dataset
 - `$ ./manage.py runserver 8005` to run server
 - Authenticate a user using any of the [available users](#available-users) trough the [login route](#authentication-routes)
 - Open `http://localhost:8005/` you'll find quick links to try different results
 - Or navigate to `http://localhost:8005/api/core/reviews/`
-- Or use Postman to test the endpoint (provide Basic Auth: user&pass)
+- Or use Postman or [vs code](#test-from-inside-vs-code) to test the endpoint (provide Basic Auth: user&pass)
 
 ## Available users
 
@@ -35,6 +39,20 @@
 
 - `/api/auth/login/`
 - `/api/auth/logout/`
+
+## Thoughts on performance
+
+I think I've reached the best performance for now,
+
+Results from [Debug Tool Bar](https://github.com/jazzband/django-debug-toolbar) (16K Reviews Dataset):
+
+![SQL Time](screenshots/16krev_sql_time.png) ![CPU Time](screenshots/16krev_cpu_time.png)
+
+- The Query is very fast, but the browser rendering (Browsable API) for the response takes time,
+we can solve that using Pagination.
+- Also we could use Postgres Materialized Views to make just one select statement (for larger datasets, 20K+)
+  - A helper for that would be this package: [https://github.com/mypebble/django-pgviews](https://github.com/mypebble/django-pgviews)
+  - we'll also need pagination for better user experience
 
 ## More commands
 
