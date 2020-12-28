@@ -13,21 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic.base import TemplateView
-import debug_toolbar
 
 api_urlpatterns = [
-    path("users/", include("shamseya_task.users.api.urls", namespace="users_api")),
     path("core/", include("shamseya_task.core.api.urls", namespace="core_api")),
 ]
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("users/", include("shamseya_task.users.urls", namespace="users")),
-    path("users/", include("django.contrib.auth.urls")),
     path("api/", include(api_urlpatterns)),
-    path("__debug__/", include(debug_toolbar.urls)),
-    path("", TemplateView.as_view(template_name="home.html"), name="home"),
 ]
+
+if getattr(settings, "DEBUG"):
+    import debug_toolbar  # noqa
+
+    urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]

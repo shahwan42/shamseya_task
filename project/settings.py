@@ -12,10 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 import environ
-import sentry_sdk
 
 from pathlib import Path
-from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -63,9 +61,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # Simplified static file serving.
-    # https://warehouse.python.org/project/whitenoise/
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -85,9 +80,7 @@ ROOT_URLCONF = "project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            BASE_DIR / "templates",
-        ],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -165,21 +158,6 @@ MEDIA_ROOT = BASE_DIR / "media/"
 
 # email
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
-# sentry
-if DEPLOY and DEPLOY not in ("LOCAL", "TESTING"):
-    sentry_sdk.init(
-        dsn=env("SENTRY_DSN", str),
-        integrations=[DjangoIntegration()],
-        traces_sample_rate=1.0,
-        # If you wish to associate users to errors (assuming you are using
-        # django.contrib.auth) you may enable sending PII data.
-        send_default_pii=True,
-    )
-
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # user model
 AUTH_USER_MODEL = "users.User"
