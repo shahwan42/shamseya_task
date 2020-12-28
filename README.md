@@ -21,7 +21,9 @@
 - `$ ./manage.py migrate` to apply migrations
 - `$ ./manage.py loaddata all_data.db` to load my data to test on
 - `$ ./manage.py runserver 8005` to run server
-- navigate to `http://localhost:8005/api/core/reviews/` to open in the browser (Make sure you're logged-in)
+- Authenticate a user using any of the [available users](#available-users) trough the [login route](#authentication-routes)
+- Open `http://localhost:8005/` you'll find quick links to try different results
+- Or navigate to `http://localhost:8005/api/core/reviews/`
 - Or use Postman to test the endpoint (provide Basic Auth: user&pass)
 
 ## Available users
