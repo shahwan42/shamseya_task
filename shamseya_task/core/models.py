@@ -2,7 +2,10 @@ from django.db import models
 
 
 class Review(models.Model):
-    submitted_at = models.DateTimeField()
+    submitted_at = models.DateField()
+
+    class Meta:
+        indexes = [models.Index(fields=["submitted_at"])]
 
 
 class Choice(models.Model):

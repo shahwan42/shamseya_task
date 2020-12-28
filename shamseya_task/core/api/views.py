@@ -1,3 +1,4 @@
+from collections import defaultdict
 from datetime import datetime
 from shamseya_task.core.api.permissions import IsSuperUser
 
@@ -6,14 +7,12 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from shamseya_task.core.api.serializers import ReviewSerializer
 from shamseya_task.core.models import Review
 
 
 class ReviewApi(APIView):
     """List of reviews and their answers, reviews are grouped by submitted_at date"""
 
-    serializer_class = ReviewSerializer
     queryset = Review.objects.all()
     permission_classes = (IsAuthenticated, IsAdminUser | IsSuperUser)
 
@@ -42,16 +41,20 @@ class ReviewApi(APIView):
         # reviews with answers
         qs = qs.prefetch_related("answers")
 
-        # response data shape should be like the follwing
-        # resp = {
-        #     "reviews": [
-        #         {
-        #             "submitted_at": "",
-        #             "count": qs.count(),
-        #             "answers": [answer.id for answer in qs],
-        #         },
-        #         ...,
-        #     ]
-        # }
+        it = qs.iterator()
 
-        return Response(ReviewSerializer(qs, many=True).data)
+        def shaped_dict():
+            return {"count": 0, "answers": []}
+
+        revs = defaultdict(shaped_dict)
+        for review in it:
+            review_date = str(review.submitted_at)
+            revs[review_date].update(
+                {
+                    "answers": revs[review_date]["answers"]
+                    + list(review.answers.values_list("id", flat=True)),
+                    "count": revs[review_date]["count"] + 1,
+                }
+            )
+        resp_data = revs
+        return Response(resp_data)
