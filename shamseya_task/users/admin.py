@@ -10,4 +10,34 @@ class UserAdmin(auth.admin.UserAdmin):
     form = UserChangeForm
     model = User
 
-    list_display = ["email", "username"]
+    list_display = ("id", "email", "name", "is_superuser", "is_staff", "is_active")
+    list_display_links = ("id",)
+    list_filter = ("is_staff", "is_active")
+    search_fields = ("email", "name")
+    ordering = ("-id",)
+
+    fieldsets = (
+        (
+            None,
+            {"fields": ("email", "name", "password")},
+        ),
+        ("Permissions", {"fields": ("is_superuser", "is_staff", "is_active")}),
+    )
+
+    add_fieldsets = (
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": (
+                    "email",
+                    "name",
+                    "password1",
+                    "password2",
+                    "is_superuser",
+                    "is_staff",
+                    "is_active",
+                ),
+            },
+        ),
+    )
