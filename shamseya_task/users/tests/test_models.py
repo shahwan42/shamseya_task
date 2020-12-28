@@ -13,7 +13,7 @@ class UserTests(TestCase):
         self.assertFalse(user.is_superuser)
         with self.assertRaises(TypeError):
             User.objects.create_user()
-        with self.assertRaises(TypeError):
+        with self.assertRaises(ValidationError):
             User.objects.create_user(username="")
         with self.assertRaises(ValidationError):
             User.objects.create_user(username="", password="foo")

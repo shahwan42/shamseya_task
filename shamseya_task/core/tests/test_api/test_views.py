@@ -16,7 +16,7 @@ class ReviewApiTests(APITestCase):
     def setUp(self) -> None:
         self.client = self.client_class()
         self.user = User.objects.create_superuser(
-            name="Ahmed Shahwan", username="ahmed", mobile="+201010092181", password=""
+            name="Ahmed Shahwan", username="ahmed"
         )
 
     def test_not_authenticated(self):
@@ -24,17 +24,13 @@ class ReviewApiTests(APITestCase):
         self.assertEqual(resp.status_code, 403)
 
     def test_authenticated_not_admin(self):
-        user = User.objects.create_user(
-            username="ahmed2", mobile="+201010092182", password=""
-        )
+        user = User.objects.create_user(username="ahmed2")
         self.client.force_login(user)
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 403)
 
     def test_authenticated_staff(self):
-        user = User.objects.create_user(
-            is_staff=True, username="ahmed2", mobile="+201010092182", password=""
-        )
+        user = User.objects.create_user(is_staff=True, username="ahmed2")
         self.client.force_login(user)
         resp = self.client.get(self.url)
         self.assertEqual(resp.status_code, 200)

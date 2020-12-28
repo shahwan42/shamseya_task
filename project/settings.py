@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Third party
-    "phonenumber_field",
     "rest_framework",
     "debug_toolbar",
     "django_extensions",

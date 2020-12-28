@@ -9,7 +9,6 @@ python = "^3.6"
 Django = "^3.1.2"
 psycopg2-binary = "^2.8.6"
 django-environ = "^0.4.5"
-django-phonenumber-field = {extras = ["phonenumbers"], version = "^5.0.0"}
 djangorestframework = "^3.12.1"
 django-extensions = "^3.0.9"
 factory-boy = "^3.1.0"

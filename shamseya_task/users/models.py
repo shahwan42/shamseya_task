@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from model_utils.models import TimeStampedModel
-from phonenumber_field.modelfields import PhoneNumberField
 
 
 class UserManager(BaseUserManager):
@@ -12,7 +11,7 @@ class UserManager(BaseUserManager):
     for authentication.
     """
 
-    def create_user(self, username, password, **extra_fields):
+    def create_user(self, username, password=None, **extra_fields):
         """
         Create and save a User with the given username and password.
         """
@@ -22,7 +21,7 @@ class UserManager(BaseUserManager):
         user.save()
         return user
 
-    def create_superuser(self, username, password, **extra_fields):
+    def create_superuser(self, username, password=None, **extra_fields):
         """
         Create and save a SuperUser with the given username and password.
         """
@@ -44,7 +43,6 @@ class User(TimeStampedModel, AbstractUser):
 
     # required
     name = models.CharField(max_length=255, blank=True)
-    mobile = PhoneNumberField(unique=True, blank=True)
 
     objects = UserManager()
 
