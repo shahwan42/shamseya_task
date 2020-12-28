@@ -1,7 +1,10 @@
 from collections import defaultdict
 from datetime import datetime
-from shamseya_task.core.api.permissions import IsSuperUser
+from shamseya_task.core.api.serializers import ReviewSerializer
 
+from django.db.models.aggregates import Count
+from shamseya_task.core.api.permissions import IsSuperUser
+from django.contrib.postgres.aggregates import ArrayAgg
 from dateutil import parser
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
@@ -13,6 +16,7 @@ from shamseya_task.core.models import Review
 class ReviewApi(APIView):
     """List of reviews and their answers, reviews are grouped by submitted_at date"""
 
+    serializer_class = ReviewSerializer
     queryset = Review.objects.all()
     permission_classes = (IsAuthenticated, IsAdminUser | IsSuperUser)
 
@@ -39,22 +43,27 @@ class ReviewApi(APIView):
             qs = qs.filter(submitted_at__lte=datetime.date(to_date))
 
         # reviews with answers
-        qs = qs.prefetch_related("answers")
+        qs = qs.prefetch_related("answers").annotate(
+            answer_ids=ArrayAgg("answers"), answer_count=Count("answers")
+        )
+        # import ipdb
+
+        # ipdb.set_trace()
 
         it = qs.iterator()
 
         def shaped_dict():
-            return {"count": 0, "answers": []}
+            return {"count": 0, "answer_ids": []}
 
         revs = defaultdict(shaped_dict)
         for review in it:
             review_date = str(review.submitted_at)
             revs[review_date].update(
                 {
-                    "answers": revs[review_date]["answers"]
-                    + list(review.answers.values_list("id", flat=True)),
+                    "answer_ids": revs[review_date]["answer_ids"] + review.answer_ids,
                     "count": revs[review_date]["count"] + 1,
                 }
             )
         resp_data = revs
+        # resp_data = self.serializer_class(qs, many=True).data
         return Response(resp_data)
