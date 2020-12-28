@@ -1,21 +1,20 @@
-from collections import defaultdict
 from datetime import datetime
 
 from dateutil import parser
-from rest_framework import generics
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from shamseya_task.core.api.serializers import ReviewSerializer
 from shamseya_task.core.models import Review
 
 
-class ReviewApi(generics.ListAPIView):
+class ReviewApi(APIView):
     serializer_class = ReviewSerializer
     queryset = Review.objects.all()
     permission_classes = (IsAuthenticated, IsAdminUser)
 
-    def get_queryset(self):
+    def get(self, request):
         from_date = self.request.query_params.get("from_date")
         to_date = self.request.query_params.get("to_date")
 
@@ -37,15 +36,19 @@ class ReviewApi(generics.ListAPIView):
 
             qs = qs.filter(submitted_at__lte=datetime.date(to_date))
 
-        qs = qs.prefetch_related("answers")
-        return qs
+        # reviews with answers
+        # qs = qs.prefetch_related("answers")
 
-    def get_paginated_response(self, data):
-        assert self.paginator is not None
-        revs = defaultdict(list)
+        # response data shape should be like the follwing
+        # resp = {
+        #     "reviews": [
+        #         {
+        #             "submitted_at": "",
+        #             "count": qs.count(),
+        #             "answers": [answer.id for answer in qs],
+        #         },
+        #         ...,
+        #     ]
+        # }
 
-        # Merge reviews that have similar dates
-        for entry in data:
-            revs[entry["submitted_at"]].append({"answers": entry["answers"]})
-
-        return self.paginator.get_paginated_response(revs)
+        return Response(ReviewSerializer(qs, many=True).data)
