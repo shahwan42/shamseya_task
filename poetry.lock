@@ -226,20 +226,15 @@ optional = false
 python-versions = ">=3.5"
 
 [[package]]
-name = "django-phonenumber-field"
-version = "5.0.0"
-description = "An international phone number field for django models."
+name = "django-pgviews"
+version = "0.5.7"
+description = "Create and manage Postgres SQL Views in Django"
 category = "main"
 optional = false
-python-versions = ">=3.5"
+python-versions = "*"
 
 [package.dependencies]
-Django = ">=2.2"
-phonenumbers = {version = ">=7.0.2", optional = true, markers = "extra == \"phonenumbers\""}
-
-[package.extras]
-phonenumbers = ["phonenumbers (>=7.0.2)"]
-phonenumberslite = ["phonenumberslite (>=7.0.2)"]
+six = "*"
 
 [[package]]
 name = "djangorestframework"
@@ -557,14 +552,6 @@ python-versions = "*"
 ptyprocess = ">=0.5"
 
 [[package]]
-name = "phonenumbers"
-version = "8.12.15"
-description = "Python version of Google's common library for parsing, formatting, storing and validating international phone numbers."
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "pickleshare"
 version = "0.7.5"
 description = "Tiny 'shelve'-like database with concurrency support"
@@ -846,7 +833,7 @@ testing = ["pytest (>=3.5,!=3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "5977dd2e39e46ae50d0a01f1b65d80d494d8af480ad492b9a5ce596a88f56a96"
+content-hash = "5572d3451599384d36353579d0af8b3ad4a449d8afc17dc84b414c7e1c336dc5"
 
 [metadata.files]
 appdirs = [
@@ -981,9 +968,9 @@ django-extensions = [
     {file = "django-extensions-3.1.0.tar.gz", hash = "sha256:7cd002495ff0a0e5eb6cdd6be759600905b4e4079232ea27618fc46bdd853651"},
     {file = "django_extensions-3.1.0-py3-none-any.whl", hash = "sha256:c7f88625a53f631745d4f2bef9ec4dcb999ed59476393bdbbe99db8596778846"},
 ]
-django-phonenumber-field = [
-    {file = "django-phonenumber-field-5.0.0.tar.gz", hash = "sha256:1eb7af3a108744665f7c3939d38aa15b3728c57d13d45d656b0a2aa11e8cdc3c"},
-    {file = "django_phonenumber_field-5.0.0-py3-none-any.whl", hash = "sha256:adb46905cc4ecb19d8494424e1c4352f24946bb472340a2a17257d44bf8228e6"},
+django-pgviews = [
+    {file = "django-pgviews-0.5.7.tar.gz", hash = "sha256:4388833629b0f208bdb910b80842e7c74aaf0ec098007859ece1bbbd996016ed"},
+    {file = "django_pgviews-0.5.7-py3-none-any.whl", hash = "sha256:e305a2a2b42a321eba83ef426d4b76eee778c77e1669f2e1c417eac1d67f5481"},
 ]
 djangorestframework = [
     {file = "djangorestframework-3.12.2-py3-none-any.whl", hash = "sha256:0209bafcb7b5010fdfec784034f059d512256424de2a0f084cb82b096d6dd6a7"},
@@ -1071,10 +1058,6 @@ pathspec = [
 pexpect = [
     {file = "pexpect-4.8.0-py2.py3-none-any.whl", hash = "sha256:0b48a55dcb3c05f3329815901ea4fc1537514d6ba867a152b581d69ae3710937"},
     {file = "pexpect-4.8.0.tar.gz", hash = "sha256:fc65a43959d153d0114afe13997d439c22823a27cefceb5ff35c2178c6784c0c"},
-]
-phonenumbers = [
-    {file = "phonenumbers-8.12.15-py2.py3-none-any.whl", hash = "sha256:13d499f7114c4b37c54ee844b188d5e7441951a7da41de5fc1a25ff8fdceef80"},
-    {file = "phonenumbers-8.12.15.tar.gz", hash = "sha256:b734bfcf33e87ddae72196a40b3d1af35abd0beb263816ae18e1bff612926406"},
 ]
 pickleshare = [
     {file = "pickleshare-0.7.5-py2.py3-none-any.whl", hash = "sha256:9649af414d74d4df115d5d718f82acb59c9d418196b7b4290ed47a12ce62df56"},
