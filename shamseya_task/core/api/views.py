@@ -1,4 +1,5 @@
 from datetime import datetime
+from shamseya_task.core.api.permissions import IsSuperUser
 
 from dateutil import parser
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
@@ -14,7 +15,7 @@ class ReviewApi(APIView):
 
     serializer_class = ReviewSerializer
     queryset = Review.objects.all()
-    permission_classes = (IsAuthenticated, IsAdminUser)
+    permission_classes = (IsAuthenticated, IsAdminUser | IsSuperUser)
 
     def get(self, request):
         from_date = self.request.query_params.get("from_date")

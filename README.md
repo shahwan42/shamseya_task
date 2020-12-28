@@ -28,7 +28,7 @@
 
 ## Available users
 
-- usernames: `super_user`, `staff_user`, `active_user`
+- usernames: `super_user`, `super_only`, `staff_user`, `active_user`
 - password (same for all): `Awesome1`
 
 ## Authentication routes

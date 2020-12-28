@@ -17,6 +17,14 @@ class Command(BaseCommand):
             super_user.set_password(test_pass)
             super_user.save()
 
+        self.stdout.write(self.style.SUCCESS("Creating super_only"))
+        super_user, created = User.objects.get_or_create(
+            username="super_only", is_superuser=True
+        )
+        if created:
+            super_user.set_password(test_pass)
+            super_user.save()
+
         self.stdout.write(self.style.SUCCESS("Creating staff_user"))
         staff_user, created = User.objects.get_or_create(
             username="staff_user", is_staff=True
