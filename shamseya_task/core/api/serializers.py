@@ -18,12 +18,12 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 
 class AnswerSerializer(serializers.ModelSerializer):
-    question = QuestionSerializer()
-    choice = ChoiceSerializer()
+    # question = QuestionSerializer()
+    # choice = ChoiceSerializer()
 
     class Meta:
         model = Answer
-        fields = ("id", "question", "choice")
+        fields = ("id",)  # "question", "choice")
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -31,4 +31,4 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        fields = ("id", "submitted_at", "answers")
+        fields = ("submitted_at", "answers")

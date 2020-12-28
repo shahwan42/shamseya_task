@@ -37,7 +37,7 @@ class ReviewApi(generics.ListAPIView):
 
             qs = qs.filter(submitted_at__lte=datetime.date(to_date))
 
-        qs = qs.prefetch_related("answers", "answers__choice", "answers__question")
+        qs = qs.prefetch_related("answers")
         return qs
 
     def get_paginated_response(self, data):
@@ -46,8 +46,6 @@ class ReviewApi(generics.ListAPIView):
 
         # Merge reviews that have similar dates
         for entry in data:
-            revs[entry["submitted_at"]].append(
-                {"id": entry["id"], "answers": entry["answers"]}
-            )
+            revs[entry["submitted_at"]].append({"answers": entry["answers"]})
 
         return self.paginator.get_paginated_response(revs)
