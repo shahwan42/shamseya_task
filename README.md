@@ -19,11 +19,20 @@
 - `$ docker-compose up` to run postgres container
 - `$ ./manage.py test` to run tests
 - `$ ./manage.py migrate` to apply migrations
-- `$ ./manage.py loaddata core` to load initial data
-- `$ ./manage.py createsuperuser` create a super user to login with, the endpoint needs an authenticated staff user
+- `$ ./manage.py loaddata all_data.db` to load my data to test on
 - `$ ./manage.py runserver 8005` to run server
 - navigate to `http://localhost:8005/api/core/reviews/` to open in the browser (Make sure you're logged-in)
 - Or use Postman to test the endpoint (provide Basic Auth: user&pass)
+
+## Available users
+
+- usernames: `super_user`, `staff_user`, `active_user`
+- password (same for all): `Awesome1`
+
+## Authentication routes
+
+- `/api/auth/login/`
+- `/api/auth/logout/`
 
 ## More commands
 

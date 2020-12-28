@@ -17,13 +17,17 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 
+from shamseya_task.core.views import home
+
 api_urlpatterns = [
+    path("auth/", include("rest_framework.urls")),
     path("core/", include("shamseya_task.core.api.urls", namespace="core_api")),
 ]
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(api_urlpatterns)),
+    path("", home, name="home"),
 ]
 
 if getattr(settings, "DEBUG"):

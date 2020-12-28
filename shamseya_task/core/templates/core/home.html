@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Shamseya Task</title>
+  <style>
+    a {
+      text-decoration: none;
+    }
+
+    li {
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Simple links to results in different cases</h1>
+  <ul>
+    <li>
+      <a href="{% url 'core_api:review_list' %}">
+        All reviews (from 2018-01-01 to 2020-12-31), Count: {{ all_count }}</a>
+    </li>
+    <li>
+      <a href="{% url 'core_api:review_list' %}?from_date=2020-12-31">
+        Reviews on 2020-12-31, Count: {{ second_count }}</a>
+    </li>
+    <li>
+      <a href="{% url 'core_api:review_list' %}?to_date=2018-01-01">
+        Reviews on 2018-01-01, Count: {{ third_count }}</a>
+    </li>
+    <li>
+      <a href="{% url 'core_api:review_list' %}?from_date=2018-01-01&to_date=2018-02-01">
+        Reviews from 2018-01-01 to 2018-02-01, Count: {{ fourth_count }}</a>
+    </li>
+    <li>
+      <a href="{% url 'core_api:review_list' %}?from_date=2018-03-01&to_date=2019-02-01">
+        Reviews from 2018-03-01 to 2019-02-01, Count: {{ fifth_count }}</a>
+    </li>
+  </ul>
+</body>
+
+</html>

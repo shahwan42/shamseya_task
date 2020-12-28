@@ -164,8 +164,3 @@ AUTH_USER_MODEL = "users.User"
 # login & logout redirect urls
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
-
-REST_FRAMEWORK = {
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
-    "PAGE_SIZE": 50,
-}
