@@ -1,6 +1,8 @@
 import datetime
-from shamseya_task.core.models import Review
+
 from django.shortcuts import render
+
+from shamseya_task.core.models import Review
 
 
 def home(request):

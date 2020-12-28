@@ -1,15 +1,15 @@
 from collections import defaultdict
 from datetime import datetime
-from shamseya_task.core.api.serializers import ReviewSerializer
 
-from django.db.models.aggregates import Count
-from shamseya_task.core.api.permissions import IsSuperUser
-from django.contrib.postgres.aggregates import ArrayAgg
 from dateutil import parser
+from django.contrib.postgres.aggregates import ArrayAgg
+from django.db.models.aggregates import Count
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from shamseya_task.core.api.permissions import IsSuperUser
+from shamseya_task.core.api.serializers import ReviewSerializer
 from shamseya_task.core.models import Review
 
 
