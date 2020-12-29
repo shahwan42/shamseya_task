@@ -1,5 +1,53 @@
 # Shamseya  Task
 
+## What's implemented
+
+**The Required:**
+
+- `api/core/reviews/` endpoint that returns all the reviews by default
+  - in this shape:
+
+  ```JSON
+  {
+    "2020-12-31": { // submitted_at field
+        "count": 16,  // reviews count field
+        "answer_count": 64, // answers count
+        "answer_ids": [  // answers ids
+            3149,
+            3150,
+            3151,
+            3152,
+            10153,
+            10154,
+            10155,
+            10156,
+        ]
+    }
+  }
+  ```
+
+  - I Collect by date, return their count, and merge all the answers for all the reviews in the specific date, and put their count
+  - *Since the shape of the data is not explicitly specified, I did what I saw suitable, and easier for me to implement.*
+  - *I also return IDs only, because no need for more information explicitly required*
+- filter reviews by `from_date` & `to_date` query params
+  - both are optional, this is tested, too.
+- I did not write units to test the shape of the data in different cases, did that manually
+
+**The Bonus:**
+
+- The endpoint is protected. Allowed for logged-in (authenticated) users only.
+  - This is satisfied with this permission `IsAuthenticated`
+- There're three users in the attached dataset
+  - you can also create them using `create_users` command
+  - refer to their passwords [here](#available-users)
+- Then Added another restriction
+  - A User must be an AdminUser (staff) or SuperUser
+  - This implemented using these permissions `IsAdminUser | IsSuperUser`
+- The previous points are satisfied with this python statement:
+  `permission_classes = (IsAuthenticated, IsAdminUser | IsSuperUser)` in the Review APIView
+  - They're tested to make sure they work as required: [test_views](./shamseya_task/core/tests/test_api/test_views.py)
+- I usually dockerize PostgreSQL, and that's what I did, since it's a bonus part I don't have the desire to do more configurations.
+
 ## Pre-requisites (On Ubuntu)
 
 - Python 3.6
@@ -13,7 +61,7 @@
   - `$ python -m venv .venv && source .venv/bin/activate`
   - `$ mkvirtualenv shamseya-task`
   - `$ poetry install && poetry shell` (will automatically create a venv and install the deps (needs poetry installed), skip following 2 steps after this approach)
-- `$ python -m pip install poetry`
+- `$ python -m pip install poetry` I use it to manage he dependencies of my projects
 - `$ poetry install` install project dependencies inside the venv
 - `$ cp .env.example .env`
 - `$ docker-compose up` to run postgres container
