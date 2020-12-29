@@ -76,10 +76,7 @@
 - `$ ./manage.py test` to run tests
 - `$ ./manage.py migrate` to apply migrations
 - `$ ./manage.py loaddata fixtures/4krev.db` to load 4K Reviews Dataset
-- `$ ./manage.py loaddata fixtures/8krev.db` to load 8K Reviews Dataset
-- `$ ./manage.py loaddata fixtures/12krev.db` to load 12K Reviews Dataset
-- `$ ./manage.py loaddata fixtures/16krev.db` to load 16K Reviews Dataset
-- `$ ./manage.py loaddata fixtures/20krev.db` to load 20K Reviews Dataset
+  - There're other datasets you can use, too.
 - `$ ./manage.py runserver 8005` to run server
 - Authenticate a user using any of the [available users](#available-users) trough the [login route](#authentication-routes)
 - Open `http://localhost:8005/` you'll find quick links to try different results
