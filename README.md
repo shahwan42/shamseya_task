@@ -49,6 +49,16 @@
   - They're tested to make sure they work as required: [test_views](./shamseya_task/core/tests/test_api/test_views.py)
 - I usually dockerize PostgreSQL, and that's what I did, since it's a bonus part I don't have the desire to do more configurations.
 
+**Extra:**
+
+- Home view (`/`) to try different results using quick links to the api endpoint
+  - This was easier for me during the manual test, and might be useful for you
+![home view](./screenshots/home.png)
+- I also use Debug Tool Bar to monitor the performance
+![djdt](./screenshots/djdt.png)
+- Plus some other helper commands to help me generate data
+- And lastly, some other boilerplate code from the [Template project](https://github.com/shahwan42/django-project) I'm using. Not harmful though.
+
 ## Pre-requisites (On Ubuntu)
 
 - Python 3.6
@@ -58,10 +68,7 @@
 
 - clone the project
 - cd into project's directory
-- create a python virtualenv and activate it (choose one of the following approaches)
-  - `$ python -m venv .venv && source .venv/bin/activate`
-  - `$ mkvirtualenv shamseya-task`
-  - `$ poetry install && poetry shell` (will automatically create a venv and install the deps (needs poetry installed), skip following 2 steps after this approach)
+- create a python virtualenv and activate it
 - `$ python -m pip install poetry` I use it to manage he dependencies of my projects
 - `$ poetry install` install project dependencies inside the venv
 - `$ cp .env.example .env`
@@ -76,8 +83,7 @@
 - `$ ./manage.py runserver 8005` to run server
 - Authenticate a user using any of the [available users](#available-users) trough the [login route](#authentication-routes)
 - Open `http://localhost:8005/` you'll find quick links to try different results
-- Or navigate to `http://localhost:8005/api/core/reviews/`
-- Or use Postman or [vs code](#test-from-inside-vs-code) to test the endpoint (provide Basic Auth: user&pass)
+- Or navigate to `http://localhost:8005/api/core/reviews/` directly
 
 ## Available users
 
@@ -107,12 +113,5 @@ we can solve that using Pagination.
 
 - `$ ./manage.py populate_db` add sample db records (takes time)
 - `$ ./manage.py clean_db` remove all db entries
-
-## Test from inside VS Code
-
-- make sure [REST Client extension](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) is installed
-- make sure db container & django server are running
-- open the `api.http` file
-- make requests and see responses :))
 
 ## Thank you
