@@ -21,12 +21,13 @@
             10154,
             10155,
             10156,
+            ...
         ]
     }
   }
   ```
 
-  - I Collect by date, return their count, and merge all the answers for all the reviews in the specific date, and put their count
+  - I collect by date, return their count, and merge all the answers for all the reviews in the specific date, and put their count
   - *Since the shape of the data is not explicitly specified, I did what I saw suitable, and easier for me to implement.*
   - *I also return IDs only, because no need for more information explicitly required*
 - filter reviews by `from_date` & `to_date` query params
